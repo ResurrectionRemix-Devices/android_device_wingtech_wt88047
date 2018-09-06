@@ -291,7 +291,7 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera \
     libshim_camera \
-    GoogleCamera-v2.7
+    Snap
 
 # Permissions
 PRODUCT_COPY_FILES += \
