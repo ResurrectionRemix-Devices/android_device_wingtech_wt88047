@@ -37,4 +37,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 BUILD_FINGERPRINT := google/marlin/marlin:8.1.0/OPM4.171019.021.P1/4820305:user/release-keys
 
 # Official Resurrection Remix device
-RR_BUILDTYPE=Official
+RR_BUILDTYPE=Final
