@@ -1,9 +1,9 @@
 [
   {
     "remote":  "github",
-    "repository":  "LineageOS/android_kernel_wingtech_msm8916",
+    "repository":  "karthikkm007/kernel_wingtech_msm8916",
     "target_path":  "kernel/wingtech/msm8916",
-    "branch":  "lineage-16.0"
+    "branch":  "oreo"
   },
   {
     "remote":  "github",
