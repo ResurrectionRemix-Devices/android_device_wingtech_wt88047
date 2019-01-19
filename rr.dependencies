@@ -1,9 +1,9 @@
 [
   {
     "remote": "github",
-    "repository": "Akianonymus/Linaro-arm",
+    "repository": "dev-harsh1998/GCC_BUILDS",
     "target_path": "prebuilts/gcc/linux-x86/arm/arm-eabi-7.3",
-    "branch": "7.2"
+    "branch": "master"
   },
   {
     "remote":  "github",
