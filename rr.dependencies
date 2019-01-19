@@ -1,5 +1,11 @@
 [
   {
+    "remote": "github",
+    "repository": "Akianonymus/Linaro-arm",
+    "target_path": "prebuilts/gcc/linux-x86/arm/arm-eabi-7.3",
+    "branch": "7.2"
+  },
+  {
     "remote":  "github",
     "repository":  "karthikkm007/kernel_wingtech_msm8916",
     "target_path":  "kernel/wingtech/msm8916",
