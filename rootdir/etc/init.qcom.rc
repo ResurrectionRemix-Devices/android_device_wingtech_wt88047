@@ -220,9 +220,6 @@ on boot
     # camera sockets
     mkdir /data/misc/camera 0770 camera camera
 
-    #Create folder for mm-qcamera-daemon
-    mkdir /data/vendor/camera 0770 camera camera
-
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
     mkdir /persist/display 0770 system graphics
@@ -263,6 +260,7 @@ service rmt_storage /system/vendor/bin/rmt_storage
     group system wakelock
     shutdown critical
     writepid /dev/cpuset/system-background/tasks
+    shutdown critical
 
 service hciattach /system/vendor/bin/init.qcom.bt.sh
     class late_start
@@ -283,6 +281,9 @@ on property:hw.fm.init=0
 
 on property:hw.fm.init=1
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 1
+
+on property:ro.vendor.ril.mbn_copy_completed=1
+    write /data/vendor/radio/copy_complete 1
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /vendor/bin/qmuxd
@@ -316,7 +317,7 @@ on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
-service ril-daemon2 /system/vendor/bin/hw/rild -c 2
+service ril-daemon2 /vendor/bin/hw/rild -c 2
     class main
     user radio
     group radio cache inet misc audio log readproc wakelock
@@ -389,10 +390,13 @@ service qcom-mem /system/vendor/bin/init.qcom.mem.sh
     disabled
     oneshot
 
-    # Improve performance and stability, fix freq sets
+on property:sys.boot_completed=1
+    restart ril-daemon
+    restart ril-daemon2
+    restart netmgrd
 
-    # 533 MHz min freq for all cores
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 533333
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 533333
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 533333
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 533333
+service rild2-wrapper /vendor/bin/sh /vendor/bin/init.qcom.ril.sh
+    class late_start
+    user root
+    group root
+    oneshot

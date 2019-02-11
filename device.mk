@@ -93,8 +93,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config \
     $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml \
-    $(LOCAL_PATH)/permissions/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/privapp-permissions-qti.xml \
-    $(LOCAL_PATH)/permissions/qti_whitelist.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/permissions/qti_whitelist.xml
+    $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:system/etc/permissions/privapp-permissions-qti.xml \
+    $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
 
 # Init scripts
 PRODUCT_PACKAGES += \
@@ -108,13 +108,13 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     fstab.qcom \
     init.target.rc \
-    init.qti.ims.sh
+    init.qti.ims.sh \
+    init.qcom.ril.sh
 
 # Shims
 PRODUCT_PACKAGES += \
     libshims_flp \
     libshims_get_process_name \
-    libshims_bionic \
     libshim_camera
 
 # Audio
@@ -273,7 +273,6 @@ PRODUCT_PACKAGES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    ims-ext-common \
     ims-common
 
 # Telephony
@@ -288,6 +287,17 @@ PRODUCT_PACKAGES += \
     ims \
     shutdownlistener \
     TimeService \
-    qcrilmsgtunnel
+    qcrilmsgtunnel \
+    uceShimService \
+    embms \
+    QtiTelephonyService \
+    android.hardware.radio.config@1.0 \
+    android.hardware.radio.deprecated@1.0 \
+    libandroid_net \
+    libqdMetaData.system \
+    libreference-ril \
+    libril \
+    librilutils \
+    vendor.qti.hardware.camera.device@1.0
 
 include device/wingtech/wt88047/default-prop.mk
